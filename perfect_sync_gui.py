@@ -8,7 +8,7 @@ VRM 完美同步小工具(图形界面) / VRM Perfect Sync Tool (GUI)
 零第三方依赖(tkinter + 标准库)。首次使用可在"初始化环境"里一键下载
 便携版 Blender 4.0.2 + VRM 插件(约 400MB,与系统里已装的 Blender 互不干扰)。
 
-运行:双击 启动完美同步工具.bat,或 python perfect_sync_gui.py
+运行:双击 Perfect-Sync.bat,或 python perfect_sync_gui.py
 """
 
 import json

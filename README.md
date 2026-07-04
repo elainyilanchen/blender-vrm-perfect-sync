@@ -25,7 +25,7 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 ## 🚀 Quick start
 
 1. **Download this repo**: click the green **Code → Download ZIP**, then unzip it to a folder you can find (e.g. your Desktop).
-2. **Double-click `Perfect-Sync.bat`** (or `启动完美同步工具.bat`).
+2. **Double-click `Perfect-Sync.bat`**.
    - If Python isn't installed, the launcher offers to install it for you.
 3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on — and can download the missing ones with one click (~400 MB, once).
 4. In the main window:
@@ -100,7 +100,7 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 
 ## ✨ 功能
 
-- **一键应用**(`启动完美同步工具.bat`):左边选供体,右边放模型,点开始。
+- **一键应用**(`Perfect-Sync.bat`):左边选供体,右边放模型,点开始。
 - **批量处理**,支持多个供体/受体组合(一个角色一个供体,各带多个版本)。
 - **首次运行向导**:自动检测并可一键下载所需的一切(Blender + VRM 插件)。
 - **中英双语界面**,适配高分屏。
@@ -112,7 +112,7 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 ## 🚀 快速开始
 
 1. **下载本仓库**:点绿色 **Code → Download ZIP**,解压到好找的文件夹(如桌面)。
-2. **双击 `启动完美同步工具.bat`**(或 `Perfect-Sync.bat`)。
+2. **双击 `Perfect-Sync.bat`**。
    - 没装 Python 会提示自动安装。
 3. 首次运行的**向导**会检测 Python / Blender / VRM 插件,可一键下载缺失项(约 400MB,仅一次)。
 4. 主界面:
