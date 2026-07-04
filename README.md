@@ -26,6 +26,8 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 
 ## 🚀 Quick start
 
+> **Prerequisite:** this app runs on **Python 3.8+**. The launcher can install it for you, or install it yourself — details in [Requirements](#-requirements).
+
 1. **Download this repo**: click the green **Code → Download ZIP**, then unzip it to a folder you can find (e.g. your Desktop).
 2. **Double-click `Perfect-Sync.bat`**.
    - If Python isn't installed, the launcher offers to install it for you.
@@ -100,7 +102,7 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 
 > 仅支持 Windows。配好后可完全离线运行。**不会修改原文件**,结果另存为 `*_ps.vrm`。
 
-![界面:左边选供体,右边加模型,点开始](docs/screenshot.png)
+![界面:左边选供体,右边加模型,点开始](docs/screenshot-zh.png)
 
 ---
 
@@ -116,6 +118,8 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 ---
 
 ## 🚀 快速开始
+
+> **前置条件:** 本应用基于 **Python 3.8+** 运行。启动器可代为安装,也可自行安装——详见 [运行需求](#-运行需求)。
 
 1. **下载本仓库**:点绿色 **Code → Download ZIP**,解压到好找的文件夹(如桌面)。
 2. **双击 `Perfect-Sync.bat`**。
