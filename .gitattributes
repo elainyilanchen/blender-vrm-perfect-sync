@@ -1,0 +1,6 @@
+# Normalize text files, but keep Windows batch launchers as CRLF so they
+# run correctly after cloning on Windows.
+* text=auto
+*.bat text eol=crlf
+*.py text eol=lf
+*.md text eol=lf
