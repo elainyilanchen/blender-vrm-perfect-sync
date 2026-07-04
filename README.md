@@ -62,11 +62,13 @@ The tool detects and rejects VRM 1.0 and mismatched face topology, so a wrong ex
 | Need | Auto-handled? |
 |------|---------------|
 | Windows 10/11 | — |
-| Python 3 | Launcher offers to auto-install |
+| **Python 3.8+** (3.12 recommended) | Launcher installs 3.12 if missing |
 | Blender (2.93–4.1, tested on 4.0.2) | Setup wizard can download a portable copy |
 | VRM add-on for Blender | Setup wizard installs it |
 
-If you already have Blender with the VRM add-on, just point the tool at your `blender.exe` and skip the download.
+**⚠️ Python prerequisite.** This app runs on Python — it's the one thing that must exist before `Perfect-Sync.bat` can start. The launcher will offer to install it automatically. If you'd rather install it yourself, get **Python 3.8 or newer** from **[python.org/downloads](https://www.python.org/downloads/)** and, in the installer, **tick “Add python.exe to PATH”** (bottom of the first screen) — otherwise the launcher can't find Python. Then double-click `Perfect-Sync.bat` again.
+
+If you already have Blender with the VRM add-on, just point the tool at your `blender.exe` and skip that download.
 
 ---
 
@@ -149,11 +151,13 @@ VRM 1.0 和拓扑不符会被工具明确报错拒收,不会产出坏文件。
 | 需要 | 是否自动处理 |
 |------|-------------|
 | Windows 10/11 | —— |
-| Python 3 | 启动器可自动安装 |
+| **Python 3.8+**(推荐 3.12) | 启动器可自动安装 3.12 |
 | Blender(2.93–4.1,测试于 4.0.2) | 向导可下载便携版 |
 | Blender 的 VRM 插件 | 向导自动安装 |
 
-已有带 VRM 插件的 Blender 的话,直接把工具指向你的 `blender.exe` 即可,跳过下载。
+**⚠️ Python 前置条件。** 本应用基于 Python 运行,是 `Perfect-Sync.bat` 启动前唯一必须先就位的东西。启动器会提示自动安装;若想自己装,请到 **[python.org/downloads](https://www.python.org/downloads/)** 下载 **Python 3.8 或更新版本**,安装时务必勾选**「Add python.exe to PATH」**(第一屏底部),否则启动器找不到 Python。装好后重新双击 `Perfect-Sync.bat` 即可。
+
+已有带 VRM 插件的 Blender 的话,直接把工具指向你的 `blender.exe`,跳过那步下载。
 
 ---
 
