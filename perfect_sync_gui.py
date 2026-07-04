@@ -130,12 +130,12 @@ TEXT = {
     "title": ("VRM 完美同步小工具", "VRM Perfect Sync Tool"),
     "lang_label": ("语言 Language:", "语言 Language:"),
     "vrm0_hint": ("⚠ VRoid Studio 导出注意:① 选 \"VRM0.0\"(VRM 1.0 会被"
-                  "拒收) ② 不要开启\"减少多边形/ポリゴンの削減\"等网格精简"
-                  "选项(拓扑会变,表情无法转移)",
+                  "拒收) ② 关闭网格精简:不要勾选\"减少多边形\"和\"删除"
+                  "透明网格\"(会改变脸部拓扑,表情无法转移)",
                   "⚠ VRoid Studio export: (1) choose \"VRM0.0\" (VRM 1.0 "
-                  "is rejected)  (2) do NOT enable \"Reduce Polygons\" or "
-                  "any mesh-reduction option (it changes the topology and "
-                  "breaks the transfer)"),
+                  "is rejected)  (2) turn off mesh reduction: leave "
+                  "\"Reduce Polygons\" and \"Delete Transparent Meshes\" "
+                  "unchecked (they change the face topology)"),
     "mode_badge_normal": ("模式:普通 — 已有完美同步表情的模型会跳过",
                           "Mode: Normal — models that already have the "
                           "keys are skipped"),

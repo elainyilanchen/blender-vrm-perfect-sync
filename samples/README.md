@@ -30,15 +30,29 @@ These donors are built from a model created from scratch in VRoid Studio using
 pixiv's default base assets. Under pixiv/VRoid's terms, a model you create this
 way may be freely used, modified, and redistributed — **but it may not be marked
 CC0**, because pixiv retains rights to the base meshes, textures and presets it
-provides. Accordingly, each sample donor is distributed as:
+provides.
 
+Since CC0 is off the table, these sample donors are distributed under
+**CC BY 4.0** — the closest widely-recognized "use it freely" license that
+pixiv's terms allow — with the following VRM metadata:
+
+- **License:** CC BY 4.0 (attribution required, copyright **not** waived)
 - **Allowed users:** everyone
 - **Modification:** allowed
 - **Redistribution:** allowed
-- **Credit:** appreciated — "VRoid Studio / pixiv" for the base assets
 - **Commercial use:** allowed
 - **Sexual / violent use:** disallowed
-- **Not CC0** (copyright not waived)
+- **Credit:** "blender-vrm-perfect-sync sample donor" + "VRoid Studio / pixiv"
+
+**What this means in practice:** you can drop these donors into the tool and add
+perfect sync to your own models freely. Attribution under CC BY only applies if
+you *redistribute the donor itself* (or a modified donor) — it is not intended to
+burden the personal models you process for your own use.
+
+> Prefer zero attribution obligation? A custom "Other" VRM license reading
+> *"free to use, modify and redistribute, including inside other models;
+> attribution appreciated but not required; not CC0"* is also fully
+> pixiv-compliant and slightly more permissive than CC BY. Either is fine.
 
 If you export your own donor and want to share it, keep the same rule of thumb:
 **you may redistribute a model you made in VRoid Studio, but do not set its
