@@ -9,6 +9,8 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 
 > Windows only. Works fully offline once set up. Your original files are never modified — results are written as new `*_ps.vrm` files.
 
+![The app: pick a donor on the left, add your models on the right, press Start](docs/screenshot.png)
+
 ---
 
 ## ✨ What you get
@@ -97,6 +99,8 @@ Everything the GUI does is a thin wrapper over headless Blender scripts you can 
 VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Desktop、VSeeFace 等)所需的 52 个 ARKit 表情。本工具把**一个供体模型**上做好的完美同步,按顶点序自动搬到**任意多个** VRoid 模型上——因为官方 VRoid 脸拓扑统一,表情形态键零误差转移,无需手动雕刻。
 
 > 仅支持 Windows。配好后可完全离线运行。**不会修改原文件**,结果另存为 `*_ps.vrm`。
+
+![界面:左边选供体,右边加模型,点开始](docs/screenshot.png)
 
 ---
 
