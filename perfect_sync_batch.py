@@ -86,8 +86,10 @@ ARKIT_52 = [
 ARKIT_LOWER = {n.lower() for n in ARKIT_52}
 LOOK_CLIPS = {"lookup", "lookdown", "lookleft", "lookright"}
 
-# 顶点序校验阈值(米):同角色略调脸型一般 < 数毫米;超过则强警告
-BASIS_DIST_WARN = 0.02
+# 顶点序校验阈值(米,已去质心):同角色 <1cm,不同角色脸型差异约 3-5cm
+# 均属正常(delta 转移只依赖顶点序,与脸型无关);顶点序错乱通常远大于此。
+# 取 6cm 以避免对"通用供体→差异较大的脸"这一主要用例误报。
+BASIS_DIST_WARN = 0.06
 
 # ---------------------------------------------------------------- 双语消息
 
@@ -454,9 +456,13 @@ def process_one(vrm_path, out_path, donors, overwrite=False,
             "mismatch", vcount,
             ", ".join(str(d["vcount"]) for d in donors)))
 
-    # 顶点序一致性校验:逐顶点距离
+    # 顶点序一致性校验:逐顶点距离。先各自去掉质心(消除角色身高/头部
+    # 位置差异,delta 转移本就与位置无关),只留形状+顶点序差异,避免对
+    # 身高不同但拓扑一致的模型误报。
     tb = get_basis_co(face).reshape(-1, 3)
     db = donor["basis"].reshape(-1, 3)
+    tb = tb - tb.mean(axis=0)
+    db = db - db.mean(axis=0)
     dist = np.linalg.norm(tb - db, axis=1)
     order_note = M("basis_note", dist.mean(), dist.max())
     if dist.mean() > BASIS_DIST_WARN:
