@@ -1,5 +1,5 @@
 <!-- Language nav -->
-**English** | [中文](#中文说明)
+**English** | [简体中文](#中文说明)
 
 # blender-vrm-perfect-sync
 
@@ -20,7 +20,7 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 - **One-click app** (`Perfect-Sync.bat`) with a friendly window — pick a donor on the left, drop your models on the right, press Start.
 - **Batch processing** with multiple donor/recipient groups (one donor per character, many versions each).
 - **First-run wizard** that checks for and can auto-download everything you need (Blender + VRM add-on).
-- **Bilingual UI** (English / 中文), high-DPI aware.
+- **Bilingual UI** (English / 简体中文), high-DPI aware.
 - **Safe**: existing keys are skipped by default; a verify step confirms every clip binding transferred correctly.
 - **Power-user CLI** underneath the GUI — see [docs/CLI.md](docs/CLI.md).
 
@@ -97,7 +97,7 @@ Everything the GUI does is a thin wrapper over headless Blender scripts you can 
 
 # 中文说明
 
-[English](#blender-vrm-perfect-sync) | **中文**
+[English](#blender-vrm-perfect-sync) | **简体中文**
 
 **给 VRoid 的 VRM 模型批量添加 iPhone/ARKit「完美同步」(52 个表情形态键),点一下就能用,无需 Blender 基础。**
 
