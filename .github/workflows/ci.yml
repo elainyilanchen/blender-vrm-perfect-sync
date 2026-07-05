@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint (ASCII launcher + compile)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Launcher must be pure ASCII
+        run: |
+          python - <<'PY'
+          data = open("Perfect-Sync.bat", "rb").read()
+          bad = [(i, b) for i, b in enumerate(data) if b > 127]
+          assert not bad, f"non-ASCII bytes in Perfect-Sync.bat: {bad[:5]}"
+          print("Perfect-Sync.bat is pure ASCII,", len(data), "bytes")
+          PY
+      - name: Python sources compile
+        run: |
+          python -m py_compile perfect_sync_gui.py perfect_sync_batch.py \
+            verify_clips.py tune_expression.py
+
+  bootstrap:
+    name: Portable-Python bootstrap (clean Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hide any pre-installed Python, then run the launcher's setup
+        shell: cmd
+        run: |
+          rem Prove the launcher works on a machine with no usable Python:
+          rem shrink PATH to the bare system dirs and force the setup branch.
+          set "PATH=%SystemRoot%\System32;%SystemRoot%"
+          set PS_AUTOINSTALL=1
+          call Perfect-Sync.bat
+          if errorlevel 1 (echo launcher bootstrap failed & exit /b 1)
+      - name: Verify the private Python + tkinter it produced
+        shell: cmd
+        run: |
+          if not exist "runtime\python\python.exe" (echo missing python & exit /b 1)
+          "runtime\python\python.exe" -c "import sys, tkinter; print('portable', sys.version.split()[0], 'tk', tkinter.TkVersion)"
+      - name: GUI headless self-test under the private Python
+        shell: cmd
+        run: |
+          "runtime\python\python.exe" perfect_sync_gui.py --check

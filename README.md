@@ -3,6 +3,8 @@
 
 # blender-vrm-perfect-sync
 
+[![CI](https://github.com/elainyilanchen/blender-vrm-perfect-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/elainyilanchen/blender-vrm-perfect-sync/actions/workflows/ci.yml)
+
 **Add iPhone/ARKit "perfect sync" (52 blendshapes) to your VRoid VRM models — in batch, with a click-to-run app. No Blender skills required.**
 
 VRoid Studio exports don't include the 52 ARKit expression shapes that face-tracking apps (Warudo, VNyan, VRM Posing Desktop, VSeeFace…) use for perfect sync. This tool copies a finished perfect-sync setup from **one donor model** onto **any number of your other VRoid models** automatically, because every official VRoid face shares the same mesh topology — the expression shapes transfer vertex-for-vertex, with zero manual sculpting.
@@ -26,11 +28,11 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 
 ## 🚀 Quick start
 
-> **Prerequisite:** this app runs on **Python 3.8+**. The launcher can install it for you, or install it yourself — details in [Requirements](#-requirements).
+> **Prerequisite:** this app runs on **Python 3.8+**. Don't have it? The launcher sets up a private copy in its own folder — no system install needed. Details in [Requirements](#-requirements).
 
 1. **Download this repo**: click the green **Code → Download ZIP**, then unzip it to a folder you can find (e.g. your Desktop).
 2. **Double-click `Perfect-Sync.bat`**.
-   - If Python isn't installed, the launcher offers to install it for you.
+   - If Python isn't installed, the launcher offers to set up a private copy in its own folder (no system changes).
 3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on — and can download the missing ones with one click (~400 MB, once).
 4. In the main window:
    - **Donor (left):** choose a model that already has perfect sync (see *Getting a donor* below).
@@ -66,11 +68,11 @@ The tool detects and rejects VRM 1.0 and mismatched face topology, so a wrong ex
 | Need | Auto-handled? |
 |------|---------------|
 | Windows 10/11 | — |
-| **Python 3.8+** (3.12 recommended) | Launcher installs 3.12 if missing |
+| **Python 3.8+** | Launcher sets up a private copy (~20 MB) if missing — no system install, no PATH changes |
 | Blender (2.93–4.1, tested on 4.0.2) | Setup wizard can download a portable copy |
 | VRM add-on for Blender | Setup wizard installs it |
 
-**⚠️ Python prerequisite.** This app runs on Python — it's the one thing that must exist before `Perfect-Sync.bat` can start. The launcher will offer to install it automatically. If you'd rather install it yourself, get **Python 3.8 or newer** from **[python.org/downloads](https://www.python.org/downloads/)** and, in the installer, **tick “Add python.exe to PATH”** (bottom of the first screen) — otherwise the launcher can't find Python. Then double-click `Perfect-Sync.bat` again.
+**About Python.** This app runs on Python. If you don't have it, `Perfect-Sync.bat` offers to set up a **private copy inside the tool's own `runtime\` folder** (~20 MB, downloaded once, integrity-checked) — nothing is installed system-wide and your PATH is untouched. If a Python is already on your PATH, the launcher just uses that. Deleting the tool folder removes everything. (Prefer a normal install? Get it from [python.org](https://www.python.org/downloads/) and tick "Add python.exe to PATH" — that works too.)
 
 If you already have Blender with the VRM add-on, just point the tool at your `blender.exe` and skip that download.
 
@@ -119,11 +121,11 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 
 ## 🚀 快速开始
 
-> **前置条件:** 本应用基于 **Python 3.8+** 运行。启动器可代为安装,也可自行安装——详见 [运行需求](#-运行需求)。
+> **前置条件:** 本应用基于 **Python 3.8+** 运行。没有的话,启动器会在工具自己的文件夹内配置一份私有副本——无需系统安装。详见 [运行需求](#-运行需求)。
 
 1. **下载本仓库**:点绿色 **Code → Download ZIP**,解压到好找的文件夹(如桌面)。
 2. **双击 `Perfect-Sync.bat`**。
-   - 没装 Python 会提示自动安装。
+   - 没装 Python 会提示在工具自己的文件夹内配置一份私有副本(不改动系统)。
 3. 首次运行的**向导**会检测 Python / Blender / VRM 插件,可一键下载缺失项(约 400MB,仅一次)。
 4. 主界面:
    - **供体(左)**:选一个已做完美同步的模型(见下方「供体从哪来」)。
@@ -159,11 +161,11 @@ VRM 1.0 和拓扑不符会被工具明确报错拒收,不会产出坏文件。
 | 需要 | 是否自动处理 |
 |------|-------------|
 | Windows 10/11 | —— |
-| **Python 3.8+**(推荐 3.12) | 启动器可自动安装 3.12 |
+| **Python 3.8+** | 缺失时启动器配置私有副本(约 20MB)——不装系统、不改 PATH |
 | Blender(2.93–4.1,测试于 4.0.2) | 向导可下载便携版 |
 | Blender 的 VRM 插件 | 向导自动安装 |
 
-**⚠️ Python 前置条件。** 本应用基于 Python 运行,是 `Perfect-Sync.bat` 启动前唯一必须先就位的东西。启动器会提示自动安装;若想自己装,请到 **[python.org/downloads](https://www.python.org/downloads/)** 下载 **Python 3.8 或更新版本**,安装时务必勾选**「Add python.exe to PATH」**(第一屏底部),否则启动器找不到 Python。装好后重新双击 `Perfect-Sync.bat` 即可。
+**关于 Python。** 本应用基于 Python 运行。若没有,`Perfect-Sync.bat` 会提示在工具自己的 **`runtime\` 文件夹内配置一份私有副本**(约 20MB,只下一次,带完整性校验)——不改动系统、不动 PATH。若 PATH 上已有 Python,启动器直接用它。删掉工具文件夹即可完全移除。(想用常规安装?到 [python.org](https://www.python.org/downloads/) 下载并勾选「Add python.exe to PATH」也可以。)
 
 已有带 VRM 插件的 Blender 的话,直接把工具指向你的 `blender.exe`,跳过那步下载。
 
