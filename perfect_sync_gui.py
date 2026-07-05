@@ -580,7 +580,7 @@ class App(tk.Tk):
         self._cfg = cfg
         # 默认英文(全球通用),中文用户首启向导里可切换
         self.lang_var = tk.StringVar(
-            value="中文" if cfg.get("lang") == "zh" else "English")
+            value="简体中文" if cfg.get("lang") == "zh" else "English")
 
         pad = {"padx": 10, "pady": 4}
 
@@ -590,7 +590,7 @@ class App(tk.Tk):
         self.lb_lang = ttk.Label(row)
         self.lb_lang.pack(side="left")
         cb = ttk.Combobox(row, textvariable=self.lang_var, width=8,
-                          state="readonly", values=("中文", "English"))
+                          state="readonly", values=("简体中文", "English"))
         cb.pack(side="left", padx=(4, 16))
         cb.bind("<<ComboboxSelected>>", lambda e: self.apply_lang())
         self.lb_blender = ttk.Label(row)
@@ -1438,7 +1438,7 @@ class Wizard(tk.Toplevel):
         self.lb_lang = ttk.Label(row)
         self.lb_lang.pack(side="left")
         cb = ttk.Combobox(row, textvariable=app.lang_var, width=8,
-                          state="readonly", values=("中文", "English"))
+                          state="readonly", values=("简体中文", "English"))
         cb.pack(side="left", padx=4)
         cb.bind("<<ComboboxSelected>>",
                 lambda e: (app.apply_lang(), self.relabel()))
@@ -1564,7 +1564,7 @@ if __name__ == "__main__":
         app.lang_var.set("English")
         app.apply_lang()
         app.update()
-        app.lang_var.set("中文")
+        app.lang_var.set("简体中文")
         app.apply_lang()
         print("GUI_OK")
         app.destroy()
