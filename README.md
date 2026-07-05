@@ -28,12 +28,17 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 
 ## 🚀 Quick start
 
-> **Prerequisite:** this app runs on **Python 3.8+**. Don't have it? The launcher sets up a private copy in its own folder — no system install needed. Details in [Requirements](#-requirements).
+1. **Download from the [Releases page](https://github.com/elainyilanchen/blender-vrm-perfect-sync/releases)** — pick one:
 
-1. **Download this repo**: click the green **Code → Download ZIP**, then unzip it to a folder you can find (e.g. your Desktop).
-2. **Double-click `Perfect-Sync.bat`**.
-   - If Python isn't installed, the launcher offers to set up a private copy in its own folder (no system changes).
-3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on — and can download the missing ones with one click (~400 MB, once).
+   | | Which file | Size | For whom |
+   |---|---|---|---|
+   | **Full** (recommended) | `…full-win64.zip` | ~450 MB | **Everything bundled** (Python + Blender + VRM add-on, ready to run offline). Best for first-timers, or if downloads keep failing on your network. |
+   | **Lite** | `…lite-win64.zip` | ~45 MB | Tool + sample donors only. Missing pieces are downloaded on demand (needs internet), or your existing Python/Blender are used. |
+
+2. **Unzip** to a folder you can find (e.g. your Desktop) → **double-click `Perfect-Sync.bat`**.
+   - Full version: starts right away, nothing to set up.
+   - Lite version without Python: the launcher offers to set up a private copy (~20 MB), or points you to the Full download.
+3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on (all ✓ already in the Full version) — and can download missing ones with one click.
    - *Missed or closed this window?* Click **Set up environment…** at the top-right of the app to reopen it anytime.
 4. In the main window:
    - **Donor (left):** choose a model that already has perfect sync (see *Getting a donor* below).
@@ -69,11 +74,13 @@ The tool detects and rejects VRM 1.0 and mismatched face topology, so a wrong ex
 | Need | Auto-handled? |
 |------|---------------|
 | Windows 10/11 | — |
-| **Python 3.8+** | Launcher sets up a private copy (~20 MB) if missing — no system install, no PATH changes |
-| Blender (2.93–4.1, tested on 4.0.2) | Setup wizard can download a portable copy |
-| VRM add-on for Blender | Setup wizard installs it |
+| **Python 3.8+** | ✅ bundled in **Full**; Lite launcher sets up a private copy (~20 MB) if missing — no system install, no PATH changes |
+| Blender (2.93–4.1, tested on 4.0.2) | ✅ bundled in **Full**; Lite wizard can download a portable copy |
+| VRM add-on for Blender | ✅ pre-installed in **Full**; Lite wizard installs it |
 
-**About Python.** This app runs on Python. If you don't have it, `Perfect-Sync.bat` offers to set up a **private copy inside the tool's own `runtime\` folder** (~20 MB, downloaded once, integrity-checked) — nothing is installed system-wide and your PATH is untouched. If a Python is already on your PATH, the launcher just uses that. Deleting the tool folder removes everything. (Prefer a normal install? Get it from [python.org](https://www.python.org/downloads/) and tick "Add python.exe to PATH" — that works too.)
+**The Full release has zero prerequisites** — all three ship inside its `runtime\` folder, nothing touches your system, and deleting the folder removes everything.
+
+**About Python (Lite version).** If you don't have Python, `Perfect-Sync.bat` offers to set up a **private copy inside the tool's own `runtime\` folder** (~20 MB, downloaded once, integrity-checked) — nothing system-wide, PATH untouched. If a Python is already on your PATH, the launcher just uses that. If the download fails on your network, switch to the **Full** release instead. (Prefer a normal install? Get it from [python.org](https://www.python.org/downloads/) and tick "Add python.exe to PATH" — that works too.)
 
 If you already have Blender with the VRM add-on, just point the tool at your `blender.exe` and skip that download.
 
@@ -122,12 +129,17 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 
 ## 🚀 快速开始
 
-> **前置条件:** 本应用基于 **Python 3.8+** 运行。没有的话,启动器会在工具自己的文件夹内配置一份私有副本——无需系统安装。详见 [运行需求](#-运行需求)。
+1. **到 [Releases 发布页](https://github.com/elainyilanchen/blender-vrm-perfect-sync/releases) 下载**,二选一:
 
-1. **下载本仓库**:点绿色 **Code → Download ZIP**,解压到好找的文件夹(如桌面)。
-2. **双击 `Perfect-Sync.bat`**。
-   - 没装 Python 会提示在工具自己的文件夹内配置一份私有副本(不改动系统)。
-3. 首次运行的**向导**会检测 Python / Blender / VRM 插件,可一键下载缺失项(约 400MB,仅一次)。
+   | | 下载哪个 | 大小 | 适合谁 |
+   |---|---|---|---|
+   | **完整版**(推荐) | `…full-win64.zip` | 约 450MB | **所有依赖已打包**(Python + Blender + VRM 插件,解压即用、可离线)。适合新手,或网络下载不稳定的情况。 |
+   | **轻量版** | `…lite-win64.zip` | 约 45MB | 只含工具和示例供体。缺的依赖按需联网下载,或用你已装好的 Python/Blender。 |
+
+2. **解压**到好找的文件夹(如桌面)→ **双击 `Perfect-Sync.bat`**。
+   - 完整版:直接启动,无需任何配置。
+   - 轻量版没装 Python 时:启动器会提示配置一份私有副本(约 20MB),或指引你改下完整版。
+3. 首次运行的**向导**会检测 Python / Blender / VRM 插件(完整版应全部 ✓),缺失可一键下载。
    - *错过或关掉了这个窗口?* 随时点应用**右上角的「初始化环境…」**按钮重新打开。
 4. 主界面:
    - **供体(左)**:选一个已做完美同步的模型(见下方「供体从哪来」)。
@@ -163,11 +175,13 @@ VRM 1.0 和拓扑不符会被工具明确报错拒收,不会产出坏文件。
 | 需要 | 是否自动处理 |
 |------|-------------|
 | Windows 10/11 | —— |
-| **Python 3.8+** | 缺失时启动器配置私有副本(约 20MB)——不装系统、不改 PATH |
-| Blender(2.93–4.1,测试于 4.0.2) | 向导可下载便携版 |
-| Blender 的 VRM 插件 | 向导自动安装 |
+| **Python 3.8+** | ✅ 完整版已打包;轻量版缺失时启动器配置私有副本(约 20MB)——不装系统、不改 PATH |
+| Blender(2.93–4.1,测试于 4.0.2) | ✅ 完整版已打包;轻量版向导可下载便携版 |
+| Blender 的 VRM 插件 | ✅ 完整版已预装;轻量版向导自动安装 |
 
-**关于 Python。** 本应用基于 Python 运行。若没有,`Perfect-Sync.bat` 会提示在工具自己的 **`runtime\` 文件夹内配置一份私有副本**(约 20MB,只下一次,带完整性校验)——不改动系统、不动 PATH。若 PATH 上已有 Python,启动器直接用它。删掉工具文件夹即可完全移除。(想用常规安装?到 [python.org](https://www.python.org/downloads/) 下载并勾选「Add python.exe to PATH」也可以。)
+**完整版零前置条件**——三样全在其 `runtime\` 文件夹里,不碰系统,删掉文件夹即彻底移除。
+
+**关于 Python(轻量版)。** 若没有 Python,`Perfect-Sync.bat` 会提示在工具自己的 **`runtime\` 文件夹内配置一份私有副本**(约 20MB,只下一次,带完整性校验)——不改动系统、不动 PATH。PATH 上已有 Python 则直接用。若你的网络下载总失败,改下**完整版**即可。(想用常规安装?到 [python.org](https://www.python.org/downloads/) 下载并勾选「Add python.exe to PATH」也可以。)
 
 已有带 VRM 插件的 Blender 的话,直接把工具指向你的 `blender.exe`,跳过那步下载。
 

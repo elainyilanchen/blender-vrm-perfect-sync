@@ -43,19 +43,20 @@ if defined PS_AUTOINSTALL goto portable
 
 rem ---------------- Python missing ----------------
 rem Bilingual popup (Base64 UTF-8 keeps this file pure ASCII)
-"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms;[void][System.Windows.Forms.MessageBox]::Show([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5pyq5om+5YiwIFB5dGhvbuOAggrmnKzlt6Xlhbflj6/ku6XmiorkuIDku73np4HmnIkgUHl0aG9uKOe6piAyME1CKemFjee9ruWIsOW3peWFt+aWh+S7tuWkueWGhSzkuI3mlLnliqjns7vnu5/jgIIK54K55Ye756Gu5a6a5ZCO5Zyo6buR6Imy56qX5Y+j5Lit6YCJ5oupOgpbMV0g6Ieq5Yqo6YWN572uKOaOqOiNkCkgIFsyXSDmiZPlvIDlrpjnvZHmiYvliqjlronoo4UKClB5dGhvbiBub3QgZm91bmQuClRoZSB0b29sIGNhbiBzZXQgdXAgYSBwcml2YXRlIGNvcHkgKH4yMCBNQikgaW5zaWRlIGl0cyBvd24gZm9sZGVyIC0gbm90aGluZyBzeXN0ZW0td2lkZS4KQWZ0ZXIgT0ssIGNob29zZSBpbiB0aGUgY29uc29sZSB3aW5kb3c6ClsxXSBhdXRvLXNldHVwIChyZWNvbW1lbmRlZCkgIFsyXSBvcGVuIHB5dGhvbi5vcmc=')),'VRM Perfect Sync')"
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms;[void][System.Windows.Forms.MessageBox]::Show([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5pyq5om+5YiwIFB5dGhvbuOAggrmnIDnroDljZU65Y675Y+R5biD6aG15LiL6L29IEZ1bGwo5a6M5pW0KeeJiOKAlOKAlOaJgOacieS+nei1luW3suaJk+WMhSzop6PljovljbPnlKjjgIIK5oiW6K6p5bel5YW36Ieq5Yqo6YWN572u5LiA5Lu956eB5pyJIFB5dGhvbijnuqYgMjBNQizpnIDogZTnvZEs5LiN5pS55Yqo57O757ufKeOAggrngrnlh7vnoa7lrprlkI7lnKjpu5HoibLnqpflj6PkuK3mjIkgMSAvIDIgLyAzIOmAieaLqeOAggoKUHl0aG9uIG5vdCBmb3VuZC4KRWFzaWVzdDogZG93bmxvYWQgdGhlIEZVTEwgcGFja2FnZSBmcm9tIHRoZSByZWxlYXNlcyBwYWdlIC0gZXZlcnl0aGluZyBidW5kbGVkLCB1bnppcCBhbmQgcnVuLgpPciBsZXQgdGhlIHRvb2wgc2V0IHVwIGEgcHJpdmF0ZSBQeXRob24gKH4yMCBNQiwgbmVlZHMgaW50ZXJuZXQsIG5vIHN5c3RlbSBjaGFuZ2VzKS4KQWZ0ZXIgT0ssIHByZXNzIDEgLyAyIC8gMyBpbiB0aGUgY29uc29sZSB3aW5kb3cu')),'VRM Perfect Sync')"
 
 echo.
-echo Python was not found on this PC. The tool can set up its own
-echo private copy inside the tool folder (about 20 MB download).
-echo Nothing is installed system-wide; deleting the runtime folder
-echo removes it completely.
+echo Python was not found on this PC. Options:
 echo.
-echo   [1] Set up private Python automatically (recommended)
-echo   [2] Open python.org to install Python manually
+echo   [1] Set up a private Python automatically
+echo       (20 MB download, nothing system-wide, needs internet)
+echo   [2] Get the FULL version instead - everything already bundled,
+echo       unzip and run (best if downloads keep failing)
+echo   [3] Open python.org to install Python manually
 echo.
-choice /c 12 /n /m "Choose 1 or 2: "
-if errorlevel 2 goto manual
+choice /c 123 /n /m "Choose 1, 2 or 3: "
+if errorlevel 3 goto manual
+if errorlevel 2 goto fullver
 
 :portable
 set "PBSVER=cpython-3.12.13+20260623-x86_64-pc-windows-msvc-install_only_stripped"
@@ -99,10 +100,27 @@ start "" "%PYDIR%\pythonw.exe" perfect_sync_gui.py
 exit /b
 
 :dlfail
+if defined PS_AUTOINSTALL ( echo BOOTSTRAP_FAILED & exit /b 1 )
 echo.
-echo Download failed (network problem?). You can also install Python
-echo manually from python.org - remember to tick "Add python.exe to PATH".
-goto manual
+echo Download failed (network problem?).
+echo The easiest fix: download the FULL version - everything is already
+echo bundled inside, no downloads needed. Opening the releases page ...
+start https://github.com/elainyilanchen/blender-vrm-perfect-sync/releases
+echo Alternatively install Python manually from python.org and tick
+echo "Add python.exe to PATH".
+echo.
+pause
+exit /b 1
+
+:fullver
+start https://github.com/elainyilanchen/blender-vrm-perfect-sync/releases
+echo.
+echo Opening the releases page in your browser. Download the file ending
+echo in "full-win64.zip" (everything bundled), unzip it anywhere, then
+echo double-click Perfect-Sync.bat inside - it starts right away.
+echo.
+pause
+exit /b 1
 
 :badhash
 del "%TARBALL%" >nul 2>nul
