@@ -34,6 +34,7 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
 2. **Double-click `Perfect-Sync.bat`**.
    - If Python isn't installed, the launcher offers to set up a private copy in its own folder (no system changes).
 3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on — and can download the missing ones with one click (~400 MB, once).
+   - *Missed or closed this window?* Click **Set up environment…** at the top-right of the app to reopen it anytime.
 4. In the main window:
    - **Donor (left):** choose a model that already has perfect sync (see *Getting a donor* below).
    - **Recipients (right):** add the models you want to add expressions to (Ctrl-click to select several).
@@ -127,6 +128,7 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
 2. **双击 `Perfect-Sync.bat`**。
    - 没装 Python 会提示在工具自己的文件夹内配置一份私有副本(不改动系统)。
 3. 首次运行的**向导**会检测 Python / Blender / VRM 插件,可一键下载缺失项(约 400MB,仅一次)。
+   - *错过或关掉了这个窗口?* 随时点应用**右上角的「初始化环境…」**按钮重新打开。
 4. 主界面:
    - **供体(左)**:选一个已做完美同步的模型(见下方「供体从哪来」)。
    - **受体(右)**:添加要加表情的模型(可 Ctrl 多选)。
