@@ -234,6 +234,17 @@ def main():
         raise RuntimeError("add-on install failed")
     log("  add-on installed and enabled (portable prefs)")
 
+    # 删除 __pycache__:是刚才跑 Blender 生成的字节码,可再生;它们的
+    # 路径比源码还长 25 字符,会白白吃掉 MAX_PATH 的余量
+    removed = 0
+    for base, dirs, _files in os.walk(stage):
+        for d in list(dirs):
+            if d == "__pycache__":
+                shutil.rmtree(os.path.join(base, d))
+                dirs.remove(d)
+                removed += 1
+    log("  stripped %d __pycache__ dirs (path-length headroom)" % removed)
+
     log("zipping full bundle (takes a few minutes) ...")
     full = zip_dir(stage, os.path.join(
         DIST, "blender-vrm-perfect-sync-%s-full-win64.zip" % ver))

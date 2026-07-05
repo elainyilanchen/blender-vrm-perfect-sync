@@ -21,8 +21,8 @@ cd /d "%~dp0"
 
 set "PSROOT=%~dp0"
 rem Long-path guard: MAX_PATH is 260 and the deepest bundled
-rem file needs ~150 chars below this folder. Warn at 110+.
-if not "%PSROOT:~109,1%"=="" if not defined PS_CHECKONLY if not defined PS_AUTOINSTALL (
+rem file needs ~150 chars below this folder. Warn at 100+.
+if not "%PSROOT:~99,1%"=="" if not defined PS_CHECKONLY if not defined PS_AUTOINSTALL (
   echo.
   echo WARNING: this folder's location is very deep/long:
   echo   %PSROOT%
