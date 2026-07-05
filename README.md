@@ -35,7 +35,8 @@ VRoid Studio exports don't include the 52 ARKit expression shapes that face-trac
    | **Full** (recommended) | `…full-win64.zip` | ~450 MB | **Everything bundled** (Python + Blender + VRM add-on, ready to run offline). Best for first-timers, or if downloads keep failing on your network. |
    | **Lite** | `…lite-win64.zip` | ~45 MB | Tool + sample donors only. Missing pieces are downloaded on demand (needs internet), or your existing Python/Blender are used. |
 
-2. **Unzip** to a folder you can find (e.g. your Desktop) → **double-click `Perfect-Sync.bat`**.
+2. **Unzip to a short path** such as `C:\vrm-tool` — avoid deep folders (e.g. WeChat's download folder); Windows breaks on paths over 260 characters. Then **double-click `Perfect-Sync.bat`**.
+   - Can't read this file? Plain-text guides are inside: `README-English.txt` / `README-简体中文.txt`.
    - Full version: starts right away, nothing to set up.
    - Lite version without Python: the launcher offers to set up a private copy (~20 MB), or points you to the Full download.
 3. On first run, the **setup wizard** checks three things — Python, Blender, and the VRM add-on (all ✓ already in the Full version) — and can download missing ones with one click.
@@ -136,7 +137,8 @@ VRoid 导出的模型默认没有面捕软件(Warudo、VNyan、VRM Posing Deskto
    | **完整版**(推荐) | `…full-win64.zip` | 约 450MB | **所有依赖已打包**(Python + Blender + VRM 插件,解压即用、可离线)。适合新手,或网络下载不稳定的情况。 |
    | **轻量版** | `…lite-win64.zip` | 约 45MB | 只含工具和示例供体。缺的依赖按需联网下载,或用你已装好的 Python/Blender。 |
 
-2. **解压**到好找的文件夹(如桌面)→ **双击 `Perfect-Sync.bat`**。
+2. **解压到短路径**,例如 `C:\vrm-tool`——不要放很深的文件夹(如微信接收文件夹);Windows 路径超 260 字符会出错。然后**双击 `Perfect-Sync.bat`**。
+   - 读不了本文件?文件夹里有纯文本版说明:`README-简体中文.txt` / `README-English.txt`。
    - 完整版:直接启动,无需任何配置。
    - 轻量版没装 Python 时:启动器会提示配置一份私有副本(约 20MB),或指引你改下完整版。
 3. 首次运行的**向导**会检测 Python / Blender / VRM 插件(完整版应全部 ✓),缺失可一键下载。

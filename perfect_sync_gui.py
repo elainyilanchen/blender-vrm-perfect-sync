@@ -55,7 +55,8 @@ def enable_dpi_awareness():
 # ---------------- 便携环境(初始化下载用) ----------------
 RUNTIME_DIR = os.path.join(SCRIPT_DIR, "runtime")
 DL_DIR = os.path.join(RUNTIME_DIR, "downloads")
-BLENDER_DIRNAME = "blender-4.0.2-windows-x64"
+BLENDER_DIRNAME = "blender-4.0.2-windows-x64"  # 官方 zip 内的目录名
+BLENDER_SHORT = "blender"  # 解压后改成短名,给 Windows 260 字符路径上限留余量
 BLENDER_ZIP = BLENDER_DIRNAME + ".zip"
 _BLENDER_TUNA = ("https://mirrors.tuna.tsinghua.edu.cn/blender/release/"
                  "Blender4.0/" + BLENDER_ZIP)
@@ -90,7 +91,10 @@ def blender_urls():
 def addon_urls():
     return ([_ADDON_PROXY, _ADDON_GH] if in_china()
             else [_ADDON_GH, _ADDON_PROXY])
-PORTABLE_EXE = os.path.join(RUNTIME_DIR, BLENDER_DIRNAME, "blender.exe")
+PORTABLE_EXE = os.path.join(RUNTIME_DIR, BLENDER_SHORT, "blender.exe")
+# 旧版布局(改短名之前下载的),继续兼容
+PORTABLE_EXE_LEGACY = os.path.join(RUNTIME_DIR, BLENDER_DIRNAME,
+                                   "blender.exe")
 
 # Blender 无界面模式的已知噪音日志,默认不显示
 NOISE_RE = re.compile(
@@ -328,9 +332,22 @@ TEXT = {
     "setup_paths": ("将安装到: {}\n下载缓存: {}",
                     "Install location: {}\nDownload cache: {}"),
     "setup_loc_label": ("安装位置:", "Install to:"),
-    "setup_loc_hint": ("(便携版 Blender 约 1GB 将解压到这里的 runtime 子夹)",
+    "setup_loc_hint": ("(便携版 Blender 约 1GB 将解压到这里的 runtime 子夹;"
+                       "请选较短的路径,避免很深的文件夹)",
                        "(portable Blender ~1GB will unpack into a runtime "
-                       "subfolder here)"),
+                       "subfolder here; pick a short path, avoid deep "
+                       "folders)"),
+    "setup_confirm_loc": ("请先确认/修改上方的\"安装位置\",然后点\"{}\"开始。",
+                          "Check or change the install location above, "
+                          "then click \"{}\" to begin."),
+    "path_too_long": ("安装路径太长({} 字符)。Windows 有 260 字符路径上限,"
+                      "Blender 插件会安装失败。请把安装位置(或整个工具"
+                      "文件夹)换到较短路径,例如 C:\\vrm-tool,再试一次。",
+                      "The install path is too long ({} chars). Windows "
+                      "caps paths at 260 characters and the Blender add-on "
+                      "install will fail. Move the install location (or "
+                      "the whole tool folder) to a short path such as "
+                      "C:\\vrm-tool and retry."),
     "setup_a": ("一键下载便携版 Blender 4.0.2 + VRM 插件\n"
                 "(约 400MB,耗时较长,只需一次;与系统里已装的 Blender 互不干扰)",
                 "Download portable Blender 4.0.2 + VRM add-on\n"
@@ -404,6 +421,8 @@ def find_blender():
     """自动探测 blender.exe:便携版优先,其次 PATH,再扫常见安装目录。"""
     if os.path.isfile(PORTABLE_EXE):
         return PORTABLE_EXE
+    if os.path.isfile(PORTABLE_EXE_LEGACY):
+        return PORTABLE_EXE_LEGACY
     w = shutil.which("blender")
     if w:
         return w
@@ -1192,10 +1211,13 @@ class SetupDialog(tk.Toplevel):
         self.log.tag_configure("ok", foreground="#1a7f37")
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         self.after(100, self.pump)
+        # 不自动开跑:先让用户确认/修改安装位置(实测反馈),高亮对应按钮
         if auto == "portable":
-            self.after(300, self.run_portable)
+            self.say(t("setup_confirm_loc", t("setup_run_a")))
+            self.bt_a.focus_set()
         elif auto == "addon":
-            self.after(300, lambda: self.run_addon(None))
+            self.say(t("setup_confirm_loc", t("setup_run_b")))
+            self.bt_b.focus_set()
 
     # ---- 基础 ----
 
@@ -1221,7 +1243,7 @@ class SetupDialog(tk.Toplevel):
         return os.path.join(self._runtime_dir(), "downloads")
 
     def _portable_exe(self):
-        return os.path.join(self._runtime_dir(), BLENDER_DIRNAME,
+        return os.path.join(self._runtime_dir(), BLENDER_SHORT,
                             "blender.exe")
 
     def say(self, text, tag=None):
@@ -1313,9 +1335,13 @@ class SetupDialog(tk.Toplevel):
         runtime = self._runtime_dir()
         dl_dir = self._dl_dir()
         portable_exe = self._portable_exe()
-        blender_home = os.path.join(runtime, BLENDER_DIRNAME)
+        blender_home = os.path.join(runtime, BLENDER_SHORT)
         self.say(t("setup_paths", blender_home, dl_dir))
         base = self.base_var.get().strip() or SCRIPT_DIR
+        # 预检:插件最深文件在 blender 目录下还要 ~120 字符,超过 260 上限
+        # 会在解压插件时报 FileNotFoundError(实测踩坑:微信接收文件夹)
+        if len(blender_home) > 130:
+            raise RuntimeError(t("path_too_long", len(blender_home)))
         try:
             os.makedirs(base, exist_ok=True)
         except OSError as e:
@@ -1335,6 +1361,11 @@ class SetupDialog(tk.Toplevel):
             except zipfile.BadZipFile:
                 os.remove(zip_path)
                 raise RuntimeError(t("extract_bad"))
+            # 官方 zip 顶层是长目录名,改成短名缩短总路径
+            # (Windows 260 字符上限;深文件夹里长名会导致插件装不上)
+            long_home = os.path.join(runtime, BLENDER_DIRNAME)
+            if os.path.isdir(long_home) and not os.path.isdir(blender_home):
+                os.rename(long_home, blender_home)
         # 便携配置目录:设置只写在解压目录里,不碰系统 Blender
         os.makedirs(os.path.join(blender_home, "4.0", "config"),
                     exist_ok=True)
@@ -1377,6 +1408,11 @@ class SetupDialog(tk.Toplevel):
 
     def _install_addon(self, exe, zip_path):
         t = self.app.t
+        # 便携式 Blender(带随身 config)的插件装在其目录下,受 260 字符限制
+        bdir = os.path.dirname(exe)
+        if os.path.isdir(os.path.join(bdir, "4.0", "config")) \
+                and len(bdir) > 130:
+            raise RuntimeError(t("path_too_long", len(bdir)))
         self.say(t("addon_installing", exe))
         fd, tmp = tempfile.mkstemp(suffix=".py")
         try:

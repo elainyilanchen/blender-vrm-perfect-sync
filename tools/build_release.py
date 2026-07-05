@@ -32,7 +32,10 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIST = os.path.join(ROOT, "dist")
 CACHE = os.path.join(DIST, "cache")
-TOPDIR = "blender-vrm-perfect-sync"  # top-level folder inside the zips
+# 短顶层目录 + 短 blender 目录名:给 Windows 260 字符路径上限留足余量
+# (实测踩坑:解压在微信接收文件夹这类深路径里,插件文件会超限装不上)
+TOPDIR = "vrm-perfect-sync"
+BLENDER_SHORT = "blender"
 
 # ---- pinned dependencies -------------------------------------------------
 BLENDER_DIRNAME = "blender-4.0.2-windows-x64"
@@ -68,6 +71,8 @@ TOOL_FILES = [
     "verify_clips.py",
     "tune_expression.py",
     "README.md",
+    "README-English.txt",
+    "README-简体中文.txt",
     "LICENSE",
     "docs/CLI.md",
     "docs/screenshot.png",
@@ -201,7 +206,9 @@ def main():
     log("extracting Blender ...")
     with zipfile.ZipFile(bzip) as z:
         z.extractall(runtime)
-    bhome = os.path.join(runtime, BLENDER_DIRNAME)
+    # rename to the short dir name (path-length headroom)
+    bhome = os.path.join(runtime, BLENDER_SHORT)
+    os.rename(os.path.join(runtime, BLENDER_DIRNAME), bhome)
     # portable config BEFORE first run so prefs stay inside the bundle
     os.makedirs(os.path.join(bhome, "4.0", "config"), exist_ok=True)
 

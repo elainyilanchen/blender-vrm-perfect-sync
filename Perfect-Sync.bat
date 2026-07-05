@@ -19,6 +19,20 @@ rem ---------------------------------------------------------------
 setlocal
 cd /d "%~dp0"
 
+set "PSROOT=%~dp0"
+rem Long-path guard: MAX_PATH is 260 and the deepest bundled
+rem file needs ~150 chars below this folder. Warn at 110+.
+if not "%PSROOT:~109,1%"=="" if not defined PS_CHECKONLY if not defined PS_AUTOINSTALL (
+  echo.
+  echo WARNING: this folder's location is very deep/long:
+  echo   %PSROOT%
+  echo The Blender VRM add-on may fail to install or load from
+  echo here - please MOVE the whole folder to a short path
+  echo such as C:\vrm-tool and start again.
+  echo.
+  start "" "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Windows.Forms;[void][System.Windows.Forms.MessageBox]::Show([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('6K2m5ZGKOuaWh+S7tuWkuei3r+W+hOWkqumVvyEKV2luZG93cyDpmZDliLbot6/lvoTmnIDplb8gMjYwIOWtl+espjvlnKjlvojmt7HnmoTmlofku7blpLnph4wo5b6u5L+h5o6l5pS25paH5Lu25aS55piv6YeN54G+5Yy6KSxCbGVuZGVyIOeahCBWUk0g5o+S5Lu25Lya5a6J6KOFL+WKoOi9veWksei0peOAggror7fmiormlbTkuKrlt6Xlhbfmlofku7blpLnnp7vliqjliLDovoPnn63kvY3nva4s5L6L5aaCIEM6XHZybS10b29sLOWGjemHjeaWsOaJk+W8gOOAggoKV0FSTklORzogZm9sZGVyIHBhdGggdG9vIGxvbmchCldpbmRvd3MgY2FwcyBwYXRocyBhdCAyNjAgY2hhcmFjdGVyczsgaW4gZGVlcCBmb2xkZXJzIChlLmcuIFdlQ2hhdCdzIGRvd25sb2FkIGZvbGRlcikgdGhlIEJsZW5kZXIgVlJNIGFkZC1vbiB3aWxsIGZhaWwgdG8gaW5zdGFsbCBvciBsb2FkLgpQbGVhc2UgbW92ZSB0aGUgd2hvbGUgdG9vbCBmb2xkZXIgdG8gYSBzaG9ydCBsb2NhdGlvbiBzdWNoIGFzIEM6XHZybS10b29sLCB0aGVuIHN0YXJ0IGFnYWluLg==')),'VRM Perfect Sync')"
+)
+
 set "PYDIR=%~dp0runtime\python"
 
 if exist "%PYDIR%\pythonw.exe" (
@@ -46,13 +60,7 @@ rem Bilingual popup (Base64 UTF-8 keeps this file pure ASCII)
 "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms;[void][System.Windows.Forms.MessageBox]::Show([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5pyq5om+5YiwIFB5dGhvbuOAggrmnIDnroDljZU65Y675Y+R5biD6aG15LiL6L29IEZ1bGwo5a6M5pW0KeeJiOKAlOKAlOaJgOacieS+nei1luW3suaJk+WMhSzop6PljovljbPnlKjjgIIK5oiW6K6p5bel5YW36Ieq5Yqo6YWN572u5LiA5Lu956eB5pyJIFB5dGhvbijnuqYgMjBNQizpnIDogZTnvZEs5LiN5pS55Yqo57O757ufKeOAggrngrnlh7vnoa7lrprlkI7lnKjpu5HoibLnqpflj6PkuK3mjIkgMSAvIDIgLyAzIOmAieaLqeOAggoKUHl0aG9uIG5vdCBmb3VuZC4KRWFzaWVzdDogZG93bmxvYWQgdGhlIEZVTEwgcGFja2FnZSBmcm9tIHRoZSByZWxlYXNlcyBwYWdlIC0gZXZlcnl0aGluZyBidW5kbGVkLCB1bnppcCBhbmQgcnVuLgpPciBsZXQgdGhlIHRvb2wgc2V0IHVwIGEgcHJpdmF0ZSBQeXRob24gKH4yMCBNQiwgbmVlZHMgaW50ZXJuZXQsIG5vIHN5c3RlbSBjaGFuZ2VzKS4KQWZ0ZXIgT0ssIHByZXNzIDEgLyAyIC8gMyBpbiB0aGUgY29uc29sZSB3aW5kb3cu')),'VRM Perfect Sync')"
 
 echo.
-echo Python was not found on this PC. Options:
-echo.
-echo   [1] Set up a private Python automatically
-echo       (20 MB download, nothing system-wide, needs internet)
-echo   [2] Get the FULL version instead - everything already bundled,
-echo       unzip and run (best if downloads keep failing)
-echo   [3] Open python.org to install Python manually
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8;Write-Host ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5pys5py65pyq5om+5YiwIFB5dGhvbuOAguWPr+mAiToKICBbMV0g6Ieq5Yqo6YWN572u5LiA5Lu956eB5pyJIFB5dGhvbijnuqYgMjBNQizkuI3mlLnliqjns7vnu58s6ZyA6IGU572RKQogIFsyXSDmlLnkuIvlrozmlbTniYgoRnVsbCnigJTigJTmiYDmnInkvp3otZblt7LmiZPljIUs5pyA6YCC5ZCI5LiL6L295oC75aSx6LSl55qE5oOF5Ya1CiAgWzNdIOaJk+W8gCBweXRob24ub3JnIOaJi+WKqOWuieijhQoKUHl0aG9uIHdhcyBub3QgZm91bmQgb24gdGhpcyBQQy4gT3B0aW9uczoKICBbMV0gU2V0IHVwIGEgcHJpdmF0ZSBQeXRob24gYXV0b21hdGljYWxseQogICAgICAoMjAgTUIgZG93bmxvYWQsIG5vdGhpbmcgc3lzdGVtLXdpZGUsIG5lZWRzIGludGVybmV0KQogIFsyXSBHZXQgdGhlIEZVTEwgdmVyc2lvbiBpbnN0ZWFkIC0gZXZlcnl0aGluZyBhbHJlYWR5CiAgICAgIGJ1bmRsZWQgKGJlc3QgaWYgZG93bmxvYWRzIGtlZXAgZmFpbGluZykKICBbM10gT3BlbiBweXRob24ub3JnIHRvIGluc3RhbGwgUHl0aG9uIG1hbnVhbGx5')))"
 echo.
 choice /c 123 /n /m "Choose 1, 2 or 3: "
 if errorlevel 3 goto manual
